@@ -1,11 +1,12 @@
 import { useCallback } from "react";
-import { useLocale, nuovoId } from "./locale";
+import { nuovoId } from "./locale";
+import { useLista } from "./condivisione";
 import { conPassi, descriviModifiche, descriviNuovo } from "./pickingPassi";
 import type { Picking, PickingDati } from "../types/picking";
 
-// Picking salvati nel browser, con lo storico dei passi (chi, cosa, quando).
+// Picking (nel browser o condivisi con la squadra), con lo storico dei passi (chi, cosa, quando).
 export function usePickingLocale(nome: string) {
-    const [voci, setVoci] = useLocale<Picking[]>("picking", []);
+    const [voci, setVoci] = useLista<Picking>("picking");
     return {
         voci,
         salva: useCallback(

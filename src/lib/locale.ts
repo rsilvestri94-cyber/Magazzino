@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-// Tutti i dati del sito gemello restano nel browser di chi lo usa (localStorage).
-// Niente server: chi apre il sito su un altro PC parte vuoto.
+// Dati salvati nel browser di chi usa il sito (localStorage): nome, disposizione dei Tools
+// e, se la condivisione non è attiva, anche le liste.
 
 const PREFISSO = "hubgemello_";
 

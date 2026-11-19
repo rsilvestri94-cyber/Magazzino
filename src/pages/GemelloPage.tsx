@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useI18n } from "../i18n/I18nContext";
 import { useLocale } from "../lib/locale";
+import { CONDIVISIONE_DISPONIBILE, codiceValido, impostaCodice, useCodiceSquadra } from "../lib/condivisione";
 import { useListaLocale, useCommentiLocali } from "../lib/listeLocali";
 import { usePrefsLocali } from "../lib/prefsLocali";
 import { usePickingLocale } from "../lib/pickingLocale";
@@ -18,8 +19,9 @@ import { QuickRail } from "../components/QuickRail/QuickRail";
 import { MiniParco, OrizzonteEolico } from "../components/Decor/Turbine";
 import type { ToolFormValues } from "../components/Tools/ToolForm";
 
-// Hub gemello: stessa disposizione dell'Hub, ma senza account né server.
-// Tutto (To-Do, liste, Picking, disposizione dei Tools) resta salvato in questo browser.
+// Hub gemello: stessa disposizione dell'Hub, senza account.
+// Le liste sono condivise con la squadra (codice squadra) se è configurato Firebase, altrimenti restano
+// nel browser. Nome e disposizione dei Tools sono sempre personali, salvati nel browser.
 
 const NESSUNA = new Set<string>();
 const niente = () => {};
@@ -28,6 +30,8 @@ export function GemelloPage() {
   const { lang, t } = useI18n();
   const [nome, setNome] = useLocale<string>("nome", "");
   const [cambiaNome, setCambiaNome] = useState(false);
+  const codice = useCodiceSquadra();
+  const manca = !nome || (CONDIVISIONE_DISPONIBILE && !codiceValido(codice));
   const prefs = usePrefsLocali();
   const todo = useListaLocale("todo");
   const esteri = useListaLocale("documentiEsteri");
@@ -59,14 +63,16 @@ export function GemelloPage() {
 
   return (
     <div className="min-h-screen">
-      {(!nome || cambiaNome) && (
+      {(manca || cambiaNome) && (
         <NomeModal
           iniziale={nome}
-          onSalva={n => {
+          codiceIniziale={codice}
+          onSalva={(n, c) => {
             setNome(n);
+            if (CONDIVISIONE_DISPONIBILE) impostaCodice(c);
             setCambiaNome(false);
           }}
-          onChiudi={nome ? () => setCambiaNome(false) : undefined}
+          onChiudi={manca ? undefined : () => setCambiaNome(false)}
         />
       )}
       <QuickRail tools={prefs.tools} quick={prefs.quick} onSave={prefs.setQuick} />

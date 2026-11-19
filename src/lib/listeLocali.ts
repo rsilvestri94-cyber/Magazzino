@@ -1,12 +1,13 @@
 import { useCallback } from "react";
-import { useLocale, nuovoId } from "./locale";
+import { nuovoId } from "./locale";
+import { useLista } from "./condivisione";
 import type { Priority, Todo } from "../types/todo";
 import type { Comment } from "../types/comment";
 
-// To-Do, Documenti esteri e Commenti salvati nel browser.
+// To-Do, Documenti esteri e Commenti: nel browser, oppure condivisi con la squadra (vedi condivisione.ts).
 
 export function useListaLocale(chiave: string) {
-    const [voci, setVoci] = useLocale<Todo[]>(chiave, []);
+    const [voci, setVoci] = useLista<Todo>(chiave);
     return {
         voci,
         aggiungi: useCallback(
@@ -29,7 +30,7 @@ export function useListaLocale(chiave: string) {
 }
 
 export function useCommentiLocali() {
-    const [voci, setVoci] = useLocale<Comment[]>("commenti", []);
+    const [voci, setVoci] = useLista<Comment>("commenti", true);
     return {
         voci,
         aggiungi: useCallback(

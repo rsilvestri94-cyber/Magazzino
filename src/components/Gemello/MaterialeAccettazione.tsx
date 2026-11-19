@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
-import { useLocale, nuovoId } from "../../lib/locale";
+import { nuovoId } from "../../lib/locale";
+import { useLista } from "../../lib/condivisione";
 
 // MATERIALE IN ACCETTAZIONE: documenti di materiale arrivato da accettare.
 // Si aggiungono a mano (numero documento + magazzino), un clic li segna accettati
-// (con "Annulla" per qualche secondo), la × li toglie. Tutto resta nel browser.
+// (con "Annulla" per qualche secondo), la × li toglie.
 
 interface Voce {
     id: string;
@@ -22,7 +23,7 @@ type Filtro = "dafare" | "fatte" | "tutte";
 const breve = (iso: string) => (iso ? new Date(iso).toLocaleDateString("it-IT", { day: "2-digit", month: "2-digit" }) : "");
 
 export function MaterialeAccettazione({ nome }: { nome: string }) {
-    const [voci, setVoci] = useLocale<Voce[]>("accettazione", []);
+    const [voci, setVoci] = useLista<Voce>("accettazione");
     const [filtro, setFiltro] = useState<Filtro>("dafare");
     const [documento, setDocumento] = useState("");
     const [magazzino, setMagazzino] = useState("");

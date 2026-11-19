@@ -109,18 +109,6 @@ export const BASE_TOOLS: Tool[] = [
     cta: { it: "Apri la cartella", en: "Open folder" },
     icon: "folder",
   },
-  {
-    key: "costi",
-    title: { it: "Costi servizi", en: "Service costs" },
-    description: {
-      it: "Spesa e consumi dei servizi usati.",
-      en: "Spend and usage of the services in use.",
-    },
-    url: "",
-    cta: { it: "Apri i costi", en: "Open costs" },
-    icon: "globe",
-    color: "#e8820c",
-  },
 ];
 
 // Inline SVG path data (viewBox 0 0 24 24) for each icon key.
