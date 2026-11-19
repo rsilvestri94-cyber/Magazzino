@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blue-dark: #00205b;
+  --color-blue-mid: #0052a5;
+  --color-accent: #00aeef;
+  --color-brand-red: #cc0000;
+  --color-grey-bg: #f0f4f8;
+  --color-grey-line: #c8d6e5;
+  --color-ink: #1a1a2e;
+
+  --color-priority-low: #6fcf97;
+  --color-priority-medium: #f2c94c;
+  --color-priority-high: #eb5757;
+
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Roboto", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-grey-bg);
+  color: var(--color-ink);
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Pale delle turbine decorative (components/Decor/Turbine.tsx) */
+@keyframes hub-gira {
+  to { transform: rotate(360deg); }
+}
+.hub-rotore {
+  animation: hub-gira 24s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub-rotore { animation: none; }
+}
+
+/* Assistente e guide animate (components/Guida) */
+.hub-mascotte { animation: hub-gira 14s linear infinite; }
+.hub-mascotte-gira { animation: hub-gira 0.9s linear infinite; }
+@keyframes hub-impulso {
+  0% { box-shadow: 0 0 0 0 rgb(0 174 239 / 0.75); }
+  100% { box-shadow: 0 0 0 16px rgb(0 174 239 / 0); }
+}
+.hub-impulso { animation: hub-impulso 1.4s ease-out infinite; }
+@keyframes hub-entra {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.hub-entra { animation: hub-entra 0.25s ease-out both; }
+/* durante un percorso le maniglie dei riquadri si vedono anche senza passare col mouse */
+.percorso-attivo [data-guida="tool-maniglie"] > * { opacity: 1 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .hub-mascotte, .hub-impulso { animation: none; }
+  .hub-mascotte-gira { animation-duration: 3s; }
+  .hub-entra { animation: none; }
+}
