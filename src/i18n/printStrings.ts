@@ -38,7 +38,7 @@ export const I18N_PRINT: Record<Lang, PrintStrings> = {
     it: {
         step1: "1 — Incolla le righe da stampare",
         pastePlaceholder:
-            "Incolla qui una o più righe copiate dall'Excel...\n\nEsempio:\n00000001\t24/06/2026\t100000123\t1234\tx\tTurbina 01\tSostituzione componente\n\nVengono usati solo: MRP, Data, Documento, VAN, Turbina, Attività. Il resto è ignorato.",
+            "Incolla qui una o più righe copiate dall'Excel...\n\nEsempio:\n00000001\t24/06/2026\t100000123\t1234\tx\tTurbina 01\tSostituzione componente",
         hintPrefix: "📋 Colonne usate:",
         hintColumns: "Data · VAN · Turbine · Activity",
         hintSuffix: "— tutto il resto viene ignorato automaticamente.",
@@ -72,7 +72,7 @@ export const I18N_PRINT: Record<Lang, PrintStrings> = {
     en: {
         step1: "1 — Paste the rows to print",
         pastePlaceholder:
-            "Paste one or more rows copied from Excel here...\n\nExample:\n00000001\t24/06/2026\t100000123\t1234\tx\tTurbina 01\tSostituzione componente\n\nOnly used: MRP, Date, Document, VAN, Turbine, Activity. Everything else is ignored.",
+            "Paste one or more rows copied from Excel here...\n\nExample:\n00000001\t24/06/2026\t100000123\t1234\tx\tTurbina 01\tSostituzione componente",
         hintPrefix: "📋 Columns used:",
         hintColumns: "Date · VAN · Turbine · Activity",
         hintSuffix: "— everything else is ignored automatically.",
